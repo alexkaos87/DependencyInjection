@@ -6,5 +6,7 @@ public interface IImportStatistics
 
     void IncrementOutputCount();
 
+    void IncrementTransformationCount();
+
     string GetStatistics();
 }

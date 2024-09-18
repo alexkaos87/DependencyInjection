@@ -5,5 +5,5 @@ public class Configuration
     // For now hardcoding the values is enough to practice with the concepts from this module
 
     public string SourceCsvPath => @"product-input.csv";
-    public string TargetCsvPath => @"product-output.csv";
+    public string TargetCsvPath => @"..\..\..\product-output.csv";
 }
