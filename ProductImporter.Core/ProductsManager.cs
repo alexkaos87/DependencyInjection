@@ -4,6 +4,7 @@ using ProductImporter.Core.Target;
 using ProductImporter.Core.Transformation;
 
 namespace ProductImporter.Core;
+
 public class ProductsManager
 {
     private readonly IProductSource _productSource;
