@@ -8,7 +8,7 @@ public class ReferenceAdder : IReferenceAdder
     private readonly IProductTransformationContext _productTransformationContext;
     private readonly IReferenceGenerator _referenceGenerator;
 
-    public ReferenceAdder(in IProductTransformationContext productTransformationContext, in IReferenceGenerator referenceGenerator)
+    public ReferenceAdder(IProductTransformationContext productTransformationContext, IReferenceGenerator referenceGenerator)
     {
         _productTransformationContext = productTransformationContext;
         _referenceGenerator = referenceGenerator;

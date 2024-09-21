@@ -30,12 +30,14 @@ using var host = Host.CreateDefaultBuilder(args)
         services.AddScoped<IProductTransformationContext, ProductTransformationContext>(); // scoped to a single product
         services.AddScoped<INameDecapitaliser, NameDecapitaliser>(); // scoped to a single product
         services.AddScoped<ICurrencyNormalizer, CurrencyNormalizer>(); // scoped to a single product
-        services.AddScoped<IReferenceAdder, ReferenceAdder>(); // scoped to a single product
 
         services.AddTransient<IProductTransformer, ProductTransformer>();
 
-        services.AddSingleton<IReferenceGenerator, ReferenceGenerator>(); // we keep the counter for all the life time of the product importer
+        services.AddScoped<IReferenceGenerator, ReferenceGenerator>(); // scoped as IDataTimeProvider dependency
         services.AddScoped<IDataTimeProvider, DataTimeProvider>(); // scoped to a single product
+        services.AddScoped<IReferenceAdder, ReferenceAdder>(); // scoped to a single product
+
+        services.AddSingleton<IIncrementingCounter, IncrementingCounter>(); // we keep the counter for all the life time of the product importer
     })
     .Build();
 
