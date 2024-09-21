@@ -25,8 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProductImporter.Core.Transformations\ProductImporter.Core.Transformations.csproj" />
-    <ProjectReference Include="..\ProductImporter.Core\ProductImporter.Core.csproj" />
+    <ProjectReference Include="..\ProductImporter.CompositionRoot\ProductImporter.CompositionRoot.csproj" />
   </ItemGroup>
 
   <ItemGroup>
