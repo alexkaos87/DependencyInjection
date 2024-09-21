@@ -10,6 +10,7 @@ using ProductImporter.Core.Transformation;
 using ProductImporter.Core.Transformations;
 using ProductImporter.Core.Transformations.Utils;
 
+// Composition root of the dependencies
 using var host = Host.CreateDefaultBuilder(args)
     .UseDefaultServiceProvider((context, options) =>
     {
@@ -49,5 +50,6 @@ using var host = Host.CreateDefaultBuilder(args)
     })
     .Build();
 
+// entrypoint of the program
 var productManager = host.Services.GetRequiredService<ProductsManager>();
 productManager.Run();
