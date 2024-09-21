@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ProductImporter.Shared;
-using ProductImporter.Source;
-using ProductImporter.Target;
-using ProductImporter.Target.EntityFramework;
-using ProductImporter.Transformation;
-using ProductImporter.Transformation.Transformations;
-using ProductImporter.Utils;
+using ProductImporter.Core;
+using ProductImporter.Core.Shared;
+using ProductImporter.Core.Source;
+using ProductImporter.Core.Target;
+using ProductImporter.Core.Target.EntityFramework;
+using ProductImporter.Core.Transformation;
+using ProductImporter.Core.Transformations;
+using ProductImporter.Core.Transformations.Utils;
 
 using var host = Host.CreateDefaultBuilder(args)
     .UseDefaultServiceProvider((context, options) =>
@@ -23,9 +24,10 @@ using var host = Host.CreateDefaultBuilder(args)
         services.AddTransient<IProductSource, ProductSource>();
 
         services.AddTransient<IProductFormatter, ProductFormatter>();
-        services.AddTransient<IProductTarget, SqlProductTarget>();
+        services.AddTransient<IProductTarget, CsvProductTarget>();
+        //services.AddTransient<IProductTarget, SqlProductTarget>();
 
-        services.AddTransient<ProductImporter.ProductImporter>();
+        services.AddTransient<ProductsManager>();
 
         services.AddSingleton<IImportStatistics, ImportStatistics>(); // singleton since need to be reused by every imported product
 
@@ -47,5 +49,5 @@ using var host = Host.CreateDefaultBuilder(args)
     })
     .Build();
 
-var productImporter = host.Services.GetRequiredService<ProductImporter.ProductImporter>();
-productImporter.Run();
+var productManager = host.Services.GetRequiredService<ProductsManager>();
+productManager.Run();
