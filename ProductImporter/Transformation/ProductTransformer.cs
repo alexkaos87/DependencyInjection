@@ -25,9 +25,11 @@ public class ProductTransformer : IProductTransformer
 
         var nameDecapitalizer = scope.ServiceProvider.GetRequiredService<INameDecapitaliser>();
         var currencyNormalizer = scope.ServiceProvider.GetRequiredService<ICurrencyNormalizer>();
+        var referenceAdder = scope.ServiceProvider.GetRequiredService<IReferenceAdder>();
 
         nameDecapitalizer.Execute();
         currencyNormalizer.Execute();
+        referenceAdder.Execute();
 
         if (transformationContext.IsProductChanged())
         {
