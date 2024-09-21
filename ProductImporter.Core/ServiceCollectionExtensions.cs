@@ -3,6 +3,7 @@
 #if UseSqlTarget
 using Microsoft.EntityFrameworkCore;
 #endif // UseSqlTarget
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProductImporter.Core.Shared;
@@ -19,8 +20,12 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddProductImporterCore(this IServiceCollection services, HostBuilderContext context)
     {
-        return services.AddSingleton<Configuration>() // changing to singleton in order to have same configuration shared to whole program
+        services.AddOptions<ProductSourceOptions>()
+            .Configure<IConfiguration>((options, config) => config.GetSection(ProductSourceOptions.SectionName).Bind(options));
+        services.AddOptions<CsvProductTargetOptions>()
+            .Configure<IConfiguration>((options, config) => config.GetSection(CsvProductTargetOptions.SectionName).Bind(options));
 
+        return services
             .AddTransient<IPriceParser, PriceParser>()
             .AddTransient<IProductSource, ProductSource>()
 
