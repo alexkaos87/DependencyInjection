@@ -3,7 +3,7 @@ using ProductImporter.Model;
 
 namespace ProductImporter.Core.Transformations;
 
-public class ReferenceAdder : IReferenceAdder
+public class ReferenceAdder : IProductTransformation
 {
     private readonly IProductTransformationContext _productTransformationContext;
     private readonly IReferenceGenerator _referenceGenerator;

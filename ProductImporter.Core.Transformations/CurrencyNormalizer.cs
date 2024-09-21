@@ -2,7 +2,7 @@
 
 namespace ProductImporter.Core.Transformations;
 
-public class CurrencyNormalizer : ICurrencyNormalizer
+public class CurrencyNormalizer : IProductTransformation
 {
     private readonly IProductTransformationContext _productTransformationContext;
 

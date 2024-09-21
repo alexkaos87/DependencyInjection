@@ -2,7 +2,7 @@
 
 namespace ProductImporter.Core.Transformations;
 
-public class NameDecapitaliser : INameDecapitaliser
+public class NameDecapitaliser : IProductTransformation
 {
     private readonly IProductTransformationContext _productTransformationContext;
 

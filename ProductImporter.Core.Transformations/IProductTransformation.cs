@@ -1,6 +1,6 @@
 ﻿namespace ProductImporter.Core.Transformations;
 
-public interface ICurrencyNormalizer
+public interface IProductTransformation
 {
     void Execute();
 }
