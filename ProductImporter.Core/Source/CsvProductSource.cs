@@ -9,10 +9,10 @@ public class CsvProductSource : IProductSource
 {
     private readonly IOptions<ProductSourceOptions> _productSourceOptions;
     private readonly IPriceParser _priceParser;
-    private readonly IImportStatistics _importStatistics;
+    private readonly IWriteImportStatistics _importStatistics;
     private TextFieldParser? _textFieldParser;
 
-    public CsvProductSource(IOptions<ProductSourceOptions> productSourceOptions, IPriceParser priceParser, IImportStatistics importStatistics)
+    public CsvProductSource(IOptions<ProductSourceOptions> productSourceOptions, IPriceParser priceParser, IWriteImportStatistics importStatistics)
     {
         _productSourceOptions = productSourceOptions;
         _priceParser = priceParser;

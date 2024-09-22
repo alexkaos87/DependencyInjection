@@ -7,11 +7,11 @@ namespace ProductImporter.Core.Source;
 public class HttpProductSource : IProductSource
 {
     private readonly HttpClient _httpClient;
-    private readonly IImportStatistics _importStatistics;
+    private readonly IWriteImportStatistics _importStatistics;
 
     private readonly Queue<Product> _cachingProducts = new();
 
-    public HttpProductSource(HttpClient httpClient, IImportStatistics importStatistics)
+    public HttpProductSource(HttpClient httpClient, IWriteImportStatistics importStatistics)
     {
         _httpClient = httpClient;
         _importStatistics = importStatistics;

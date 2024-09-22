@@ -7,10 +7,10 @@ namespace ProductImporter.Core.Target;
 
 public class SqlProductTarget : IProductTarget
 {
-    private readonly IImportStatistics _importStatistics;
+    private readonly IWriteImportStatistics _importStatistics;
     private readonly IServiceScopeFactory _serviceScopeFactory;
 
-    public SqlProductTarget(IServiceScopeFactory serviceScopeFactory, IImportStatistics importStatistics)
+    public SqlProductTarget(IServiceScopeFactory serviceScopeFactory, IWriteImportStatistics importStatistics)
     {
         _importStatistics = importStatistics;
         _serviceScopeFactory = serviceScopeFactory;

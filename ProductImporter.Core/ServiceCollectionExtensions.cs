@@ -58,6 +58,8 @@ public static class ServiceCollectionExtensions
             .AddTransient<IPriceParser, PriceParser>()
             .AddTransient<IProductFormatter, ProductFormatter>()
             .AddTransient<ProductsManager>()
-            .AddSingleton<IImportStatistics, ImportStatistics>(); // singleton since need to be reused by every imported product
+            .AddSingleton<ImportStatistics>() // singleton since need to be reused by every imported product
+            .AddSingleton<IWriteImportStatistics>(provider => provider.GetRequiredService<ImportStatistics>()) 
+            .AddSingleton<IGetImportStatistics>(provider => provider.GetRequiredService<ImportStatistics>());
     }
 }

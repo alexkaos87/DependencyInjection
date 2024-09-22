@@ -8,10 +8,10 @@ public class CsvProductTarget : IProductTarget
 {
     private readonly IOptions<CsvProductTargetOptions> _productTargetOptions;
     private readonly IProductFormatter _productFormatter;
-    private readonly IImportStatistics _importStatistics;
+    private readonly IWriteImportStatistics _importStatistics;
     private StreamWriter? _streamWriter;
 
-    public CsvProductTarget(IOptions<CsvProductTargetOptions> productTargetOptions, IProductFormatter productFormatter, IImportStatistics importStatistics)
+    public CsvProductTarget(IOptions<CsvProductTargetOptions> productTargetOptions, IProductFormatter productFormatter, IWriteImportStatistics importStatistics)
     {
         _productTargetOptions = productTargetOptions;
         _productFormatter = productFormatter;

@@ -14,7 +14,7 @@ namespace ProductImporter.Core.Tests
         private Mock<IProductSource> _productSourceMock;
         private Mock<IProductTransformer> _productTransformerMock;
         private Mock<IProductTarget> _productTargetMock;
-        private Mock<IImportStatistics> _importStatisticsMock;
+        private Mock<IGetImportStatistics> _importStatisticsMock;
 
         [TestInitialize]
         public void TestInit()

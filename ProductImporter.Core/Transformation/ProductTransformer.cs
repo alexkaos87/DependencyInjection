@@ -8,9 +8,9 @@ namespace ProductImporter.Core.Transformation;
 public class ProductTransformer : IProductTransformer
 {
     private readonly IServiceScopeFactory _serviceScopeFactory;
-    private readonly IImportStatistics _importStatistics;
+    private readonly IWriteImportStatistics _importStatistics;
 
-    public ProductTransformer(IServiceScopeFactory serviceScopeFactory, IImportStatistics importStatistics)
+    public ProductTransformer(IServiceScopeFactory serviceScopeFactory, IWriteImportStatistics importStatistics)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _importStatistics = importStatistics;

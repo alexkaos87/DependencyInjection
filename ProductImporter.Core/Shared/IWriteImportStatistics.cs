@@ -1,12 +1,10 @@
 ﻿namespace ProductImporter.Core.Shared;
 
-public interface IImportStatistics
+public interface IWriteImportStatistics
 {
     void IncrementImportCount();
 
     void IncrementOutputCount();
 
     void IncrementTransformationCount();
-
-    string GetStatistics();
 }

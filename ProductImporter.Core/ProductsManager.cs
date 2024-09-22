@@ -10,9 +10,9 @@ public class ProductsManager
     private readonly IProductSource _productSource;
     private readonly IProductTransformer _productTransformer;
     private readonly IProductTarget _productTarget;
-    private readonly IImportStatistics _importStatistics;
+    private readonly IGetImportStatistics _importStatistics;
 
-    public ProductsManager(IProductSource productSource, IProductTransformer productTransformer, IProductTarget productTarget, IImportStatistics importStatistics)
+    public ProductsManager(IProductSource productSource, IProductTransformer productTransformer, IProductTarget productTarget, IGetImportStatistics importStatistics)
     {
         _productSource = productSource;
         _productTransformer = productTransformer;
