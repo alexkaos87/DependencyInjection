@@ -18,4 +18,4 @@ using var host = Host.CreateDefaultBuilder(args)
 
 // entrypoint of the program
 var productManager = host.Services.GetRequiredService<ProductsManager>();
-productManager.Run();
+await productManager.RunAsync();

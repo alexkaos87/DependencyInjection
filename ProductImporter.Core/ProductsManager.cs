@@ -20,9 +20,9 @@ public class ProductsManager
         _importStatistics = importStatistics;
     }
 
-    public void Run()
+    public async Task RunAsync()
     {
-        _productSource.Open();
+        await _productSource.OpenAsync();
         _productTarget.Open();
 
         while (_productSource.hasMoreProducts())

@@ -19,10 +19,12 @@ public class ProductSource : IProductSource
         _importStatistics = importStatistics;
     }
 
-    public void Open()
+    public Task OpenAsync()
     {
         _textFieldParser = new TextFieldParser(_productSourceOptions.Value.SourceCsvPath);
         _textFieldParser.SetDelimiters(",");
+
+        return Task.CompletedTask;
     }
 
     public bool hasMoreProducts()

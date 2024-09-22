@@ -4,7 +4,7 @@ namespace ProductImporter.Core.Source;
 
 public interface IProductSource
 {
-    void Open();
+    Task OpenAsync();
     bool hasMoreProducts();
     Product GetNextProduct();
     void Close();
