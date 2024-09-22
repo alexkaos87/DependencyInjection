@@ -47,7 +47,19 @@ public static class ServiceCollectionExtensions
 
         if (productOptions.ApplyTransformations)
         {
-            services.AddTransient<IProductTransformer, ProductTransformer>();
+            if (productOptions.UseLazyTransformer)
+            {
+                services.AddTransient<Lazy<IProductTransformer>>(provider => new(() =>
+                {
+                    var serviceScopeFactory = provider.GetRequiredService<IServiceScopeFactory>();
+                    var importStatistics = provider.GetRequiredService<IWriteImportStatistics>();
+                    return new ProductTransformer(serviceScopeFactory, importStatistics);
+                }));
+            }
+            else
+            {
+                services.AddTransient<IProductTransformer, ProductTransformer>();
+            }
         }
         else
         {

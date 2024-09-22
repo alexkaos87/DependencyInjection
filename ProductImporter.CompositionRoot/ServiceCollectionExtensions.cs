@@ -16,6 +16,7 @@ namespace ProductImporter.CompositionRoot
                     options.SourceProductType = SourceType.CsvFile; 
                     options.TargetProductType = TargetType.CsvFile;
                     options.ApplyTransformations = true;
+                    options.UseLazyTransformer = true;
                 })
                 .AddProductImporterCoreTransformations();
         }

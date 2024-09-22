@@ -8,11 +8,11 @@ namespace ProductImporter.Core;
 public class ProductsManager
 {
     private readonly IProductSource _productSource;
-    private readonly IProductTransformer _productTransformer;
+    private readonly Lazy<IProductTransformer> _productTransformer;
     private readonly IProductTarget _productTarget;
     private readonly IGetImportStatistics _importStatistics;
 
-    public ProductsManager(IProductSource productSource, IProductTransformer productTransformer, IProductTarget productTarget, IGetImportStatistics importStatistics)
+    public ProductsManager(IProductSource productSource, Lazy<IProductTransformer> productTransformer, IProductTarget productTarget, IGetImportStatistics importStatistics)
     {
         _productSource = productSource;
         _productTransformer = productTransformer;
@@ -29,7 +29,7 @@ public class ProductsManager
         {
             var product = _productSource.GetNextProduct();
 
-            var transformedProduct = _productTransformer.ApplyTransformations(product);
+            var transformedProduct = _productTransformer.Value.ApplyTransformations(product);
 
             _productTarget.AddProduct(transformedProduct);
         }
