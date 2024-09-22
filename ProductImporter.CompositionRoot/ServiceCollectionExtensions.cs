@@ -11,7 +11,12 @@ namespace ProductImporter.CompositionRoot
         public static IServiceCollection AddProductImporter(this IServiceCollection services, HostBuilderContext context)
         {
             return services
-                .AddProductImporterCore(context, options => { options.SourceProductType = SourceType.CsvFile; options.TargetProductType = TargetType.CsvFile; })
+                .AddProductImporterCore(context, options => 
+                { 
+                    options.SourceProductType = SourceType.CsvFile; 
+                    options.TargetProductType = TargetType.CsvFile;
+                    options.ApplyTransformations = true;
+                })
                 .AddProductImporterCoreTransformations();
         }
     }

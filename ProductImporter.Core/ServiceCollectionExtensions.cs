@@ -45,15 +45,19 @@ public static class ServiceCollectionExtensions
                 break;
         }
 
+        if (productOptions.ApplyTransformations)
+        {
+            services.AddTransient<IProductTransformer, ProductTransformer>();
+        }
+        else
+        {
+            services.AddTransient<IProductTransformer, NullProductTransformer>();
+        }
+
         return services
             .AddTransient<IPriceParser, PriceParser>()
-
             .AddTransient<IProductFormatter, ProductFormatter>()
-
             .AddTransient<ProductsManager>()
-
-            .AddSingleton<IImportStatistics, ImportStatistics>() // singleton since need to be reused by every imported product
-
-            .AddTransient<IProductTransformer, ProductTransformer>();
+            .AddSingleton<IImportStatistics, ImportStatistics>(); // singleton since need to be reused by every imported product
     }
 }
