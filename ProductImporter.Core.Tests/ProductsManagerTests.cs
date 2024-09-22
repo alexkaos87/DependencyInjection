@@ -4,6 +4,7 @@ using ProductImporter.Core.Source;
 using ProductImporter.Core.Target;
 using ProductImporter.Core.Transformation;
 using ProductImporter.Model;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ProductImporter.Core.Tests
 {
@@ -24,8 +25,9 @@ namespace ProductImporter.Core.Tests
             _productTargetMock = new();
             _importStatisticsMock = new();
 
-            _manager = new(_productSourceMock.Object, 
-                _productTransformerMock.Object, 
+            var lazyTransformer = new Lazy<IProductTransformer>(() => _productTransformerMock.Object);
+            _manager = new(_productSourceMock.Object,
+                lazyTransformer, 
                 _productTargetMock.Object, 
                 _importStatisticsMock.Object);
         }

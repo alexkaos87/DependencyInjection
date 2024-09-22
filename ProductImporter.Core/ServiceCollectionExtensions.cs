@@ -33,17 +33,22 @@ public static class ServiceCollectionExtensions
                 break;
         }
 
-        switch (productOptions.TargetProductType)
-        {
-            case TargetType.CsvFile:
-                services.AddTransient<IProductTarget, CsvProductTarget>();
-                break;
-            case TargetType.SqlServer:
-                services
-                    .AddTransient<IProductTarget, SqlProductTarget>()
-                    .AddDbContext<TargetContext>(options => options.UseSqlServer(context.Configuration["TargetContextConnectionString"]));
-                break;
-        }
+        services
+            .AddTransient<CsvProductTarget>()
+            .AddTransient<SqlProductTarget>()
+            .AddDbContext<TargetContext>(options => options.UseSqlServer(context.Configuration["TargetContextConnectionString"]))
+            .AddTransient<IProductTarget>(provider =>
+            {
+                var configuration = provider.GetRequiredService<IConfiguration>();
+                if (configuration.GetValue<int>("EnableCsvTarget") == 1)
+                {
+                    return provider.GetRequiredService<CsvProductTarget>();
+                }
+                else
+                {
+                    return provider.GetRequiredService<SqlProductTarget>();
+                }
+            });
 
         if (productOptions.ApplyTransformations)
         {
