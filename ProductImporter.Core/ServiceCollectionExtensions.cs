@@ -12,16 +12,28 @@ namespace ProductImporter.Core;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddProductImporterCore(this IServiceCollection services, HostBuilderContext context, Action<ProductTargetOptions> optionsProvider)
+    public static IServiceCollection AddProductImporterCore(this IServiceCollection services, HostBuilderContext context, Action<ProductOptions> optionsProvider)
     {
         services.AddOptions<ProductSourceOptions>()
             .Configure<IConfiguration>((options, config) => config.GetSection(ProductSourceOptions.SectionName).Bind(options));
         services.AddOptions<CsvProductTargetOptions>()
             .Configure<IConfiguration>((options, config) => config.GetSection(CsvProductTargetOptions.SectionName).Bind(options));
 
-        var targetOptions = new ProductTargetOptions();
-        optionsProvider(targetOptions);
-        switch (targetOptions.Type)
+        var productOptions = new ProductOptions();
+        optionsProvider(productOptions);
+        switch (productOptions.SourceProductType)
+        {
+            case SourceType.CsvFile:
+                services.AddTransient<IProductSource, CsvProductSource>();
+                break;
+            case SourceType.Http:
+                services
+                    .AddHttpClient<IProductSource, HttpProductSource>()
+                    .ConfigureHttpClient(client => client.BaseAddress = new Uri("https://raw.githubusercontent.com/henrybeen/"));
+                break;
+        }
+
+        switch (productOptions.TargetProductType)
         {
             case TargetType.CsvFile:
                 services.AddTransient<IProductTarget, CsvProductTarget>();
@@ -35,7 +47,6 @@ public static class ServiceCollectionExtensions
 
         return services
             .AddTransient<IPriceParser, PriceParser>()
-            .AddTransient<IProductSource, ProductSource>()
 
             .AddTransient<IProductFormatter, ProductFormatter>()
 

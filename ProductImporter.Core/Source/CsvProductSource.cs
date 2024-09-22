@@ -5,14 +5,14 @@ using ProductImporter.Model;
 
 namespace ProductImporter.Core.Source;
 
-public class ProductSource : IProductSource
+public class CsvProductSource : IProductSource
 {
     private readonly IOptions<ProductSourceOptions> _productSourceOptions;
     private readonly IPriceParser _priceParser;
     private readonly IImportStatistics _importStatistics;
     private TextFieldParser? _textFieldParser;
 
-    public ProductSource(IOptions<ProductSourceOptions> productSourceOptions, IPriceParser priceParser, IImportStatistics importStatistics)
+    public CsvProductSource(IOptions<ProductSourceOptions> productSourceOptions, IPriceParser priceParser, IImportStatistics importStatistics)
     {
         _productSourceOptions = productSourceOptions;
         _priceParser = priceParser;
